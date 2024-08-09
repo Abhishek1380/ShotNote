@@ -1,0 +1,381 @@
+/* Navbar css */
+
+/* Reset some default styles */
+body,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Styling for the navbar */
+/* Base Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    /* Light mode background */
+    padding: 1rem 2rem;
+    font-family: Arial, sans-serif;
+}
+
+.navbar-logo {
+    color: #000;
+    /* Light mode text color */
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar-links {
+    display: flex;
+}
+
+.navbar-links li {
+    margin-left: 1rem;
+}
+
+.navbar-links a {
+    color: #000;
+    /* Light mode link color */
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.navbar-links a:hover {
+    color: #007bff;
+    /* Light mode hover color */
+}
+
+/* Toggle button for mobile view */
+.navbar-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.navbar-toggle .bar {
+    height: 3px;
+    width: 25px;
+    background-color: #000;
+    /* Light mode toggle color */
+    margin: 4px 0;
+    transition: all 0.3s;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .navbar-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background-color: #f8f9fa;
+        /* Light mode background */
+    }
+
+    .navbar-links li {
+        text-align: center;
+        margin: 1rem 0;
+    }
+
+    .navbar-toggle {
+        display: flex;
+    }
+
+    .navbar-links.active {
+        display: flex;
+    }
+}
+
+/* Dark Mode Styles */
+body.dark-mode .navbar {
+    background-color: #343a40;
+    /* Dark mode background */
+}
+
+body.dark-mode .navbar-logo {
+    color: #fff;
+    /* Dark mode text color */
+}
+
+body.dark-mode .navbar-links a {
+    color: #fff;
+    /* Dark mode link color */
+}
+
+body.dark-mode .navbar-links a:hover {
+    color: #f4a261;
+    /* Dark mode hover color */
+}
+
+body.dark-mode .navbar-toggle .bar {
+    background-color: #fff;
+    /* Dark mode toggle color */
+}
+
+body.dark-mode .navbar-links {
+    background-color: #343a40;
+    /* Dark mode background */
+}
+
+
+/* Container for the news items */
+.news-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allows items to wrap onto the next line */
+    gap: 1rem;
+    /* Space between cards */
+    justify-content: center;
+    /* Center items horizontally */
+    padding: 1rem;
+    /* Padding around the container */
+}
+
+/* Individual card styling */
+/* Card styling for light mode */
+.custom-card {
+    flex: 1 1 300px;
+    /* Flex-grow, flex-shrink, and flex-basis */
+    max-width: 300px;
+    /* Maximum width for cards */
+    border: 1px solid #ddd;
+    /* Border for cards */
+    border-radius: 0.5rem;
+    /* Rounded corners */
+    overflow: hidden;
+    /* Hide overflow for rounded corners */
+    margin: 0.5rem;
+    /* Margin around cards */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Shadow for card */
+    background-color: #ffffff;
+    /* Background color for cards in light mode */
+    color: #333;
+    /* Text color for cards in light mode */
+}
+
+/* Card image styling */
+.card-img-top {
+    height: 200px;
+    /* Set a fixed height */
+    object-fit: cover;
+    /* Ensures the image covers the entire area */
+    width: 100%;
+    /* Make sure it takes the full width of the container */
+    border-top-left-radius: calc(.25rem - 1px);
+    border-top-right-radius: calc(.25rem - 1px);
+}
+
+/* Card body styling */
+.card-body {
+    padding: 1rem;
+    /* Padding inside the card body */
+}
+
+/* Card title styling */
+.card-title {
+    margin-bottom: 0.5rem;
+    /* Space below the title */
+}
+
+/* Card text styling */
+.card-text {
+    margin-bottom: 1rem;
+    /* Space below the description */
+}
+
+/* Button styling */
+.btn-primary {
+    display: inline-block;
+    /* Ensure button displays as block element */
+    padding: 0.5rem 1rem;
+    /* Padding inside the button */
+    font-size: 1rem;
+    /* Font size of the button text */
+    border: none;
+    /* Remove default border */
+    border-radius: 0.25rem;
+    /* Rounded corners for the button */
+    background-color: #007bff;
+    /* Primary button color */
+    color: #fff;
+    /* Text color */
+    text-align: center;
+    /* Center text inside button */
+    text-decoration: none;
+    /* Remove underline from links */
+}
+
+/* Dark mode styles */
+body.dark-mode .custom-card {
+    background-color: #333;
+    /* Darker background for cards */
+    color: #ffffff;
+    /* White text for better readability */
+    border: 1px solid #555;
+    /* Darker border for the card */
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    /* Softer shadow in dark mode */
+}
+
+body.dark-mode .card-title,
+body.dark-mode .card-text {
+    color: #ffffff;
+    /* Ensure titles and text are white in dark mode */
+}
+
+body.dark-mode .card-img-top {
+    opacity: 0.9;
+    /* Slight opacity for images in dark mode */
+}
+
+
+/* Media queries for responsiveness */
+
+/* iPhone SE (up to 568px wide) - 2 cards per row */
+@media (max-width: 568px) {
+    .custom-card {
+        flex: 1 1 calc(50% - 2rem);
+        /* 2 cards per row */
+    }
+}
+
+/* iPhone XR (up to 828px wide) - 1 card per row */
+@media (max-width: 828px) {
+    .custom-card {
+        flex: 1 1 calc(100% - 2rem);
+        /* 1 card per row */
+    }
+}
+
+/* iPad Mini (up to 768px wide) - 2 cards per row */
+@media (max-width: 768px) {
+    .custom-card {
+        flex: 1 1 calc(50% - 2rem);
+        /* 2 cards per row */
+    }
+}
+
+/* Surface Pro (up to 1024px wide) - 2 cards per row */
+@media (max-width: 1024px) {
+    .custom-card {
+        flex: 1 1 calc(50% - 2rem);
+        /* 2 cards per row */
+    }
+}
+
+/* Below 400px width - 1 card per row */
+@media (max-width: 580px) {
+    .custom-card {
+        flex: 1 1 calc(100% - 2rem);
+        /* 1 card per row */
+    }
+}
+
+/* Light-dark mode css */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Adjust the dark mode for the navbar and buttons */
+body.dark-mode .navbar {
+    background-color: #333;
+}
+
+body.dark-mode .navbar .nav-link,
+body.dark-mode .navbar .navbar-brand {
+    color: #ffffff;
+}
+
+body.dark-mode .btn-outline-secondary {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+body.dark-mode .btn-outline-secondary:hover {
+    background-color: #ffffff;
+    color: #121212;
+}
+
+
+
+/* Pagination Css */
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding-left: 0;
+}
+
+.page-item {
+    margin: 0 5px;
+    /* Adjust the space between each pagination block */
+}
+
+.page-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    /* Adjust the padding as needed */
+    font-size: 1rem;
+    font-weight: 400;
+    color: #007bff;
+    /* Adjust the color as needed */
+    text-align: center;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+}
+
+.page-link:hover {
+    background-color: #e9ecef;
+    /* Adjust the hover background color as needed */
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d;
+    /* Adjust the color for disabled state */
+    pointer-events: none;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+
+/* Spinner styles */
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    /* Light background with opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Ensure it's on top of everything */
+    backdrop-filter: blur(5px);
+    /* Blur the background */
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner img {
+    width: 100px;
+    /* Adjust size as needed */
+    height: 100px;
+}
