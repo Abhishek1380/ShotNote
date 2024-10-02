@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+/* if you set a div to be 100px wide, with 20px padding and 5px border, the total width will still be 100px. Without border-box, the padding and border would add to the size, making it bigger than expected. */
+
+header {
+    width: 100%;
+    padding: 0 10px;
+}
+
+.top-nav {
+    display: flex;
+    align-items: center;
+    /* If there are 2 section, each section will occupy respective edge */
+    justify-content: space-between;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    height: 35px;
+    padding: 0 50px;
+}
+
+.top-nav-left ul li,
+.top-nav-right ul li {
+    display: inline;
+}
+
+.top-nav-left ul li a,
+.top-nav-right ul li a {
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 14px;
+    color: #060404;
+}
+
+.top-nav-right ul li a {
+    margin: 0 6px;
+    justify-content: space-between;
+}
+
+.middle-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 43px;
+}
+
+.middle-nav .mid-nav-center ul li {
+    display: inline;
+}
+
+.middle-nav .mid-nav-center ul li a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #616066;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+.middle-nav .mid-nav-right ul li {
+    display: inline;
+}
+
+.middle-nav .mid-nav-right ul li a {
+    margin: 0 10px;
+    color: #747272;
+    font-size: 24px;
+
+}
+
+.middle-nav .mid-nav-right ul li a:hover {
+    color: rgb(231, 9, 9);
+}
+
+.middle-nav .logo h1 span {
+    font-size: 25px;
+    color: rgb(77, 76, 76);
+    font-weight: 800;
+}
+
+.bottom-nav {
+    background: #000000;
+}
+
+.bottom-nav p {
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-size: 15px;
+}
+
+.bottom-nav p a {
+    color: #e49449;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-size: 15px;
+    font-weight: 600;
+}
