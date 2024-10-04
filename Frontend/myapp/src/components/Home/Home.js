@@ -4,7 +4,7 @@ import Paragraph from './Paragraph';
 const Home = () => {
     return (
         <>
-
+            <Navbar />
             <Paragraph />
         </>
     )
