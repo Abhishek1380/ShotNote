@@ -6,7 +6,7 @@
 }
 
 /* if you set a div to be 100px wide, with 20px padding and 5px border, the total width will still be 100px. Without border-box, the padding and border would add to the size, making it bigger than expected. */
-
+/* Top layer of Navigation bar */
 header {
     width: 100%;
     padding: 0 10px;
@@ -41,6 +41,7 @@ header {
     justify-content: space-between;
 }
 
+/* Middle layer of Navigation bar */
 .middle-nav {
     display: flex;
     align-items: center;
@@ -82,6 +83,7 @@ header {
     font-weight: 800;
 }
 
+/* Top layer of Navigation bar */
 .bottom-nav {
     background: #000000;
 }
