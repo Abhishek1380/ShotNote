@@ -1,1 +1,58 @@
 node_modules
+# Ignore node_modules
+node_modules/
+
+# Ignore Windows system files
+NTUSER.DAT*
+ntuser.dat.LOG*
+ntuser.ini
+
+# Ignore project folders
+Desktop/
+Documents/
+Downloads/
+
+
+# Ignore Windows system files
+NTUSER.DAT*
+ntuser.dat.LOG*
+ntuser.ini
+
+# Ignore folders
+AppData/
+Desktop/
+Documents/
+Downloads/
+Contacts/
+Favorites/
+Music/
+Pictures/
+Videos/
+Links/
+Saved Games/
+Searches/
+OneDrive/
+IntelGraphicsProfiles/
+npm-cache/
+
+# Ignore project folders
+C++ Codes/
+EazyMeal/
+IdeaProjects/
+Js/
+Navigation Bar/
+NewsApp/
+NodeJs/
+Proton Drive/
+PycharmProjects/
+Python/
+Python 3.10(2)/
+Tut67/
+Web Design/
+Zomato-Listing-Page/
+food-website/
+my-react-app/
+
+# Ignore npm related files
+node_modules/
+package-lock.json
