@@ -10,7 +10,7 @@ const Flashcard = () => {
     useEffect(() => {
         const fetchFlashcards = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/vocabulary');
+                const response = await axios.get('https://shotnote.onrender.com/vocabulary');
                 setFlashcards(response.data);
                 setFlippedStates(new Array(response.data.length).fill(false));
                 console.log(response.data);
