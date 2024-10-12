@@ -12,10 +12,10 @@ function App() {
   return (
     <>
       <Navbar />
-      {/* <LanguageParagraphs /> */}
+      <LanguageParagraphs />
       {/* <PostParagraphData /> */}
       {/* <AddVocabulary /> */}
-      <Flashcard />
+      {/* <Flashcard /> */}
 
 
     </>

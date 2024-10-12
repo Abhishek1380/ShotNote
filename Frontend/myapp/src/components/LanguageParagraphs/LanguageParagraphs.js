@@ -14,7 +14,7 @@ const LanguageParagraphs = () => {
     useEffect(() => {
         const fetchParagraphs = async () => {
             try {
-                const response = await fetch('http://localhost:3000/sample');
+                const response = await fetch('https://shotnote.onrender.com/sample');
                 if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
                 setParagraphs(data);
