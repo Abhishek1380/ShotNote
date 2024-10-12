@@ -1,0 +1,25 @@
+.blog-post {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 30px auto;
+
+}
+
+.card-img-top {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+}
+
+.button-container {
+    text-align: right;
+}
+
+.btn-info {
+    margin: 0 4px;
+}

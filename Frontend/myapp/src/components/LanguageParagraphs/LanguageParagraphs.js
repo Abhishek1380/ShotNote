@@ -1,0 +1,105 @@
+import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import './LanguageParagraphs.css';
+
+const LanguageParagraphs = () => {
+    const [translatedText, setTranslatedText] = useState('');
+    const [paragraphs, setParagraphs] = useState([]);
+    const [activeParagraphIndex, setActiveParagraphIndex] = useState(0);
+    const [activeLanguage, setActiveLanguage] = useState('Japanese');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchParagraphs = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/sample');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                setParagraphs(data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchParagraphs();
+    }, []);
+
+    const handleLanguageChange = (language) => {
+        if (language === 'English') {
+            setTranslatedText(paragraphs[activeParagraphIndex]?.english);
+        } else if (language === 'Romaji') {
+            setTranslatedText(paragraphs[activeParagraphIndex]?.romaji);
+        } else {
+            setTranslatedText(paragraphs[activeParagraphIndex]?.japanese);
+        }
+        setActiveLanguage(language);
+    };
+
+    const handleNext = () => {
+        if (activeParagraphIndex < paragraphs.length - 1) {
+            setActiveParagraphIndex(prevIndex => prevIndex + 1);
+            setTranslatedText('');
+        }
+    };
+
+    const handlePrevious = () => {
+        if (activeParagraphIndex > 0) {
+            setActiveParagraphIndex(prevIndex => prevIndex - 1);
+            setTranslatedText('');
+        }
+    };
+
+    return (
+        <div className="blog-post">
+            {loading && <p>Loading...</p>}
+            {error && <p>Error fetching data: {error}</p>}
+            {!loading && !error && paragraphs.length > 0 && (
+                <div className="card mb-3">
+                    <div dangerouslySetInnerHTML={{ __html: paragraphs[activeParagraphIndex].img }} />
+                    <div className="card-body">
+                        <h5 className="card-title">
+                            {paragraphs[activeParagraphIndex].title.japanese}
+                        </h5>
+                        <p className="card-text">
+                            {paragraphs[activeParagraphIndex].japanese}
+                        </p>
+                        <div className="button-container">
+                            <button type="button" className="btn btn-info" onClick={() => handleLanguageChange('English')}>English</button>
+                            <button type="button" className="btn btn-info" onClick={() => handleLanguageChange('Romaji')}>Romaji</button>
+                        </div>
+                    </div>
+                    {translatedText && (
+                        <div className="card mb-3 mt-3">
+                            <div className="card-body">
+                                <h5 className="card-title">
+                                    {activeLanguage === 'Romaji' ? paragraphs[activeParagraphIndex].title.romaji :
+                                        activeLanguage === 'English' ? paragraphs[activeParagraphIndex].title.english : null}
+                                </h5>
+                                <p className="card-text">{translatedText}</p>
+                            </div>
+                        </div>
+                    )}
+                    <nav aria-label="Page navigation example">
+                        <ul className="pagination justify-content-center">
+                            <li className={`page-item ${activeParagraphIndex === 0 ? 'disabled' : ''}`}>
+                                <button className="page-link" onClick={handlePrevious} disabled={activeParagraphIndex === 0}>Previous</button>
+                            </li>
+                            <li className="page-item">
+                                <span className="page-link">{activeParagraphIndex + 1} / {paragraphs.length}</span>
+                            </li>
+                            <li className={`page-item ${activeParagraphIndex === paragraphs.length - 1 ? 'disabled' : ''}`}>
+                                <button className="page-link" onClick={handleNext} disabled={activeParagraphIndex === paragraphs.length - 1}>Next</button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default LanguageParagraphs;

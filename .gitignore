@@ -1,58 +1,62 @@
-node_modules
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE Specific Files
+.vscode/
+.idea/
+*.swp
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build files (if not needed in production)
+dist/
+build/
+
+# Coverage files
+coverage/
+*.lcov
+
+# Miscellaneous
+*.tgz
+*.zip
+
+# Temporary files
+tmp/
+temp/
+
+
+# Ignore .env files
+*.env
+
 # Ignore node_modules
 node_modules/
 
-# Ignore Windows system files
-NTUSER.DAT*
-ntuser.dat.LOG*
-ntuser.ini
+# Ignore temporary files
+*.log
+
 
 # Ignore project folders
 Desktop/
 Documents/
 Downloads/
-
-
-# Ignore Windows system files
-NTUSER.DAT*
-ntuser.dat.LOG*
-ntuser.ini
-
-# Ignore folders
-AppData/
-Desktop/
-Documents/
-Downloads/
-Contacts/
-Favorites/
-Music/
-Pictures/
-Videos/
-Links/
-Saved Games/
-Searches/
-OneDrive/
-IntelGraphicsProfiles/
-npm-cache/
-
-# Ignore project folders
-C++ Codes/
-EazyMeal/
-IdeaProjects/
-Js/
-Navigation Bar/
-NewsApp/
-NodeJs/
-Proton Drive/
-PycharmProjects/
-Python/
-Python 3.10(2)/
-Tut67/
-Web Design/
-Zomato-Listing-Page/
-food-website/
-my-react-app/
-
-# Ignore npm related files
-node_modules/
-package-lock.json

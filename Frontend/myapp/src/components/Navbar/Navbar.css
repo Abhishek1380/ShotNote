@@ -1,0 +1,59 @@
+.navbar {
+    padding: 1rem 1rem;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.nav-item .nav-link {
+    margin-right: 1rem;
+}
+
+.nav-link {
+    color: #333;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #007bff;
+}
+
+.navbar-expand-lg .navbar-collapse {
+    justify-content: space-between;
+}
+
+.btn-outline-success {
+    border: 1px solid #28a745;
+    color: #28a745;
+}
+
+.btn-outline-secondary {
+    border: 1px solid #6c757d;
+    color: #6c757d;
+}
+
+.dark-mode {
+    background-color: #343a40;
+    color: white;
+}
+
+.dark-mode .navbar {
+    background-color: #495057;
+}
+
+.dark-mode .nav-link {
+    color: white;
+}
+
+.dark-mode .btn-outline-success {
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.dark-mode .btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+}
