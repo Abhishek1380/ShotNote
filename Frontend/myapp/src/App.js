@@ -13,7 +13,7 @@ function App() {
     <>
       <Navbar />
       <LanguageParagraphs />
-      {/* <PostParagraphData /> */}
+      <PostParagraphData />
       {/* <AddVocabulary /> */}
       {/* <Flashcard /> */}
 

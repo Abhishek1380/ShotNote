@@ -7,14 +7,14 @@ import './AddVocabulary.css';
 function AddVocabulary({ isAdmin }) {
     const [vocabularyList, setVocabularyList] = useState([]);
     const [formData, setFormData] = useState({
-        goi: '',
+        kanji: '',
+        furigana: '',
         vocabulary: '',
-        type: '',
         meaning: ''
     });
 
     useEffect(() => {
-        axios.get('http://localhost:3000/vocabulary')
+        axios.get('https://shotnote.onrender.com/vocabulary')
             .then((response) => {
                 setVocabularyList(response.data);
             })
@@ -32,10 +32,10 @@ function AddVocabulary({ isAdmin }) {
     };
 
     const addVocabulary = () => {
-        axios.post('http://localhost:3000/vocabulary', formData)
+        axios.post('https://shotnote.onrender.com/vocabulary', formData)
             .then((response) => {
                 setVocabularyList([...vocabularyList, response.data]);
-                setFormData({ goi: '', vocabulary: '', type: '', meaning: '' });
+                setFormData({ kanji: '', furigana: '', vocabulary: '', meaning: '' });
             })
             .catch((error) => {
                 console.error('Error adding vocabulary:', error);
@@ -43,7 +43,7 @@ function AddVocabulary({ isAdmin }) {
     };
 
     const deleteVocabulary = (id) => {
-        axios.delete(`http://localhost:3000/vocabulary/${id}`)
+        axios.delete(`https://shotnote.onrender.com/vocabulary/${id}`)
             .then(() => {
                 setVocabularyList(vocabularyList.filter((item) => item._id !== id));
             })
@@ -58,9 +58,9 @@ function AddVocabulary({ isAdmin }) {
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">ごい</th>
+                        <th scope="col">kanji</th>
+                        <th scope="col">furigana</th>
                         <th scope="col">Vocabulary</th>
-                        <th scope="col">Type</th>
                         <th scope="col">Meaning</th>
                         {isAdmin && <th scope="col">Actions</th>}
                     </tr>
@@ -69,9 +69,9 @@ function AddVocabulary({ isAdmin }) {
                     {vocabularyList.map((item, index) => (
                         <tr key={index}>
                             <th scope="row">{index + 1}</th>
-                            <td>{item.goi}</td>
+                            <td>{item.kanji}</td>
+                            <td>{item.furigana}</td>
                             <td>{item.vocabulary}</td>
-                            <td>{item.type}</td>
                             <td>{item.meaning}</td>
                             {/* {isAdmin && ( */}
                             <td>
@@ -97,9 +97,19 @@ function AddVocabulary({ isAdmin }) {
                         <input
                             type="text"
                             className="form-control"
-                            name="goi"
-                            placeholder="ごい (Goi)"
-                            value={formData.goi}
+                            name="kanji"
+                            placeholder="Kanji"
+                            value={formData.kanji}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="furigana"
+                            placeholder="Furigana"
+                            value={formData.furigana}
                             onChange={handleChange}
                         />
                     </div>
@@ -113,16 +123,7 @@ function AddVocabulary({ isAdmin }) {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            className="form-control"
-                            name="type"
-                            placeholder="Type"
-                            value={formData.type}
-                            onChange={handleChange}
-                        />
-                    </div>
+
                     <div className="form-group">
                         <input
                             type="text"

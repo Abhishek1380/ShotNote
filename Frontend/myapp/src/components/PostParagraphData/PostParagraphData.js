@@ -38,7 +38,7 @@ const PostParagraphData = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:3000/sample', paragraphData);
+            const response = await axios.post('https://shotnote.onrender.com/sample', paragraphData);
             console.log(response.data);
             alert('Paragraph saved successfully!');
         } catch (error) {
