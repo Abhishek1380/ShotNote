@@ -11,7 +11,8 @@ const LanguageParagraphs = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const [isRandomMode, setIsRandomMode] = useState(false); // New state to manage mode
+    const [isRandomMode, setIsRandomMode] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false); // Assuming admin status is fetched or determined somehow
 
     useEffect(() => {
         const fetchParagraphs = async () => {
@@ -25,6 +26,11 @@ const LanguageParagraphs = () => {
                 if (data.length > 0) {
                     setRandomParagraph(data.length);
                 }
+
+                // Assuming some way to determine admin status, for example:
+                const userIsAdmin = true; // Replace with actual admin check
+                setIsAdmin(userIsAdmin);
+
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -54,7 +60,6 @@ const LanguageParagraphs = () => {
 
     const handleNext = () => {
         if (!isRandomMode) {
-            // Only allow sequential navigation if not in random mode
             if (activeParagraphIndex < paragraphs.length - 1) {
                 setActiveParagraphIndex(prevIndex => prevIndex + 1);
                 setTranslatedText('');
@@ -64,7 +69,6 @@ const LanguageParagraphs = () => {
 
     const handlePrevious = () => {
         if (!isRandomMode) {
-            // Only allow sequential navigation if not in random mode
             if (activeParagraphIndex > 0) {
                 setActiveParagraphIndex(prevIndex => prevIndex - 1);
                 setTranslatedText('');
@@ -83,6 +87,32 @@ const LanguageParagraphs = () => {
             setActiveParagraphIndex(0); // Reset to first paragraph if switching to sequential
         } else {
             handleRandomParagraph(); // Randomly select a paragraph if switching to random
+        }
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await fetch(`https://shotnote.onrender.com/paragraphs/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Add authorization header if needed for admin check
+                    // 'Authorization': `Bearer ${yourToken}`
+                }
+            });
+
+            if (!response.ok) {
+                // Handle response error with more details
+                const errorData = await response.json();
+                throw new Error(`Failed to delete the paragraph: ${errorData.message}`);
+            }
+
+            // Remove the deleted paragraph from the state
+            setParagraphs(paragraphs.filter(paragraph => paragraph._id !== id));
+            alert('Paragraph deleted successfully');
+        } catch (error) {
+            console.error('Error deleting paragraph:', error.message);
+            setError(`Error deleting paragraph: ${error.message}`);
         }
     };
 
@@ -127,6 +157,15 @@ const LanguageParagraphs = () => {
                             >
                                 {isRandomMode ? 'Switch to Sequential' : 'Switch to Random'}
                             </button>
+                            {/* {isAdmin && ( */}
+                            <button
+                                type="button"
+                                className="btn btn-danger"
+                                onClick={() => handleDelete(paragraphs[activeParagraphIndex]._id)}
+                            >
+                                Delete Paragraph
+                            </button>
+                            {/* )} */}
                         </div>
                     </div>
                     {translatedText && (
