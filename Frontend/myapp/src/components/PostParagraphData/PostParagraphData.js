@@ -148,20 +148,17 @@ const PostParagraphData = () => {
                         />
                     </div>
                 ))}
-                {formData.images.length < 6 && (
-                    <button type="button" onClick={() => setFormData({ ...formData, images: [...formData.images, ''] })}>
-                        Add Another Image
-                    </button>
-                )}
-
-                <button type="submit">Save Paragraph</button>
+                <div className="flex">
+                    {formData.images.length < 6 && (
+                        <button type="button" onClick={() => setFormData({ ...formData, images: [...formData.images, ''] })}>
+                            Add Image
+                        </button>
+                    )}
+                    <button type="submit">Save Paragraph</button>
+                </div>
             </form>
 
-            <div className="image-preview">
-                {formData.images.map((image, index) => (
-                    <img key={index} src={image} alt={`Image ${index + 1}`} style={{ width: '100px', height: '100px' }} />
-                ))}
-            </div>
+
         </div>
     );
 };

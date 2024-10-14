@@ -12,7 +12,6 @@ const LanguageParagraphs = () => {
     const [error, setError] = useState(null);
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [isRandomMode, setIsRandomMode] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(false); // Assuming admin status is fetched or determined somehow
 
     useEffect(() => {
         const fetchParagraphs = async () => {
@@ -22,15 +21,10 @@ const LanguageParagraphs = () => {
                 const data = await response.json();
                 setParagraphs(data);
 
-                // Select a random paragraph on initial load
+
                 if (data.length > 0) {
                     setRandomParagraph(data.length);
                 }
-
-                // Assuming some way to determine admin status, for example:
-                const userIsAdmin = true; // Replace with actual admin check
-                setIsAdmin(userIsAdmin);
-
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -44,7 +38,7 @@ const LanguageParagraphs = () => {
     const setRandomParagraph = (length) => {
         const randomIndex = Math.floor(Math.random() * length);
         setActiveParagraphIndex(randomIndex);
-        setIsRandomMode(true); // Switch to random mode
+        setIsRandomMode(true);
     };
 
     const handleLanguageChange = (language) => {
@@ -78,41 +72,15 @@ const LanguageParagraphs = () => {
 
     const handleRandomParagraph = () => {
         setRandomParagraph(paragraphs.length);
-        setTranslatedText(''); // Reset translated text when changing paragraph
+        setTranslatedText('');
     };
 
     const handleToggleMode = () => {
-        setIsRandomMode(prevMode => !prevMode); // Toggle between random and sequential mode
+        setIsRandomMode(prevMode => !prevMode);
         if (isRandomMode) {
-            setActiveParagraphIndex(0); // Reset to first paragraph if switching to sequential
+            setActiveParagraphIndex(0);
         } else {
-            handleRandomParagraph(); // Randomly select a paragraph if switching to random
-        }
-    };
-
-    const handleDelete = async (id) => {
-        try {
-            const response = await fetch(`https://shotnote.onrender.com/paragraphs/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Add authorization header if needed for admin check
-                    // 'Authorization': `Bearer ${yourToken}`
-                }
-            });
-
-            if (!response.ok) {
-                // Handle response error with more details
-                const errorData = await response.json();
-                throw new Error(`Failed to delete the paragraph: ${errorData.message}`);
-            }
-
-            // Remove the deleted paragraph from the state
-            setParagraphs(paragraphs.filter(paragraph => paragraph._id !== id));
-            alert('Paragraph deleted successfully');
-        } catch (error) {
-            console.error('Error deleting paragraph:', error.message);
-            setError(`Error deleting paragraph: ${error.message}`);
+            handleRandomParagraph();
         }
     };
 
@@ -145,31 +113,25 @@ const LanguageParagraphs = () => {
                             </button>
                             <button
                                 type="button"
-                                className="btn btn-secondary"
+                                className="btn btn-man"
                                 onClick={handleRandomParagraph}
                             >
                                 Random Paragraph
                             </button>
                             <button
                                 type="button"
-                                className="btn btn-secondary"
+                                className="btn btn-man"
                                 onClick={handleToggleMode}
                             >
                                 {isRandomMode ? 'Switch to Sequential' : 'Switch to Random'}
                             </button>
-                            {/* {isAdmin && ( */}
-                            <button
-                                type="button"
-                                className="btn btn-danger"
-                                onClick={() => handleDelete(paragraphs[activeParagraphIndex]._id)}
-                            >
-                                Delete Paragraph
-                            </button>
-                            {/* )} */}
                         </div>
                     </div>
                     {translatedText && (
                         <div className="card mb-3 mt-3">
+                            <div className="image-containerr" style={{ margin: 'auto' }}>
+                                <div dangerouslySetInnerHTML={{ __html: paragraphs[activeParagraphIndex]?.img }} />
+                            </div>
                             <div className="card-body">
                                 <h5 className="card-title">
                                     {activeLanguage === 'Romaji' ? paragraphs[activeParagraphIndex].title.romaji :

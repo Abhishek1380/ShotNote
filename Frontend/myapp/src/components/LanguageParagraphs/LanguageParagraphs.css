@@ -27,7 +27,10 @@
 
 .btn-info {
     margin: 0 4px;
+    color: #000000;
 }
+
+
 
 
 .light {
@@ -53,6 +56,15 @@
     color: inherit;
 }
 
+.button-container .btn {
+    background-color: #eee;
+    border: 1px solid #04AA6D
+}
+
+.dark .btn {
+    color: #000000;
+}
+
 .image-container img {
     border-radius: 57px;
     padding: 10px 5px;
@@ -66,5 +78,30 @@
 @media (max-width: 1000px) {
     .blog-post {
         width: 95%;
+    }
+}
+
+@media (min-width: 500px) {
+    .image-containerr {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+
+
+    .image-containerr {
+        display: block;
+    }
+
+    .image-containerr img {
+        border-radius: 57px;
+        padding: 10px 5px;
+        width: 100%;
+    }
+
+    .flex {
+        display: flex;
+        gap: 3px;
     }
 }
