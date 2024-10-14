@@ -25,13 +25,13 @@
     margin: 0 4px;
 }
 
-/* Light Mode Styles */
+
 .light {
     background-color: #ffffff;
     color: #000000;
 }
 
-/* Dark Mode Styles */
+
 .dark {
     background-color: #333333;
     color: #ffffff;
@@ -43,15 +43,14 @@
 
 .card {
     background-color: inherit;
-    /* Inherit background color from body */
 }
 
 .button-container .btn {
     color: inherit;
-    /* Adjust button text color based on theme */
 }
 
 .image-container img {
     border-radius: 57px;
-    margin-top: 16px;
+    padding: 10px 5px;
+    width: 100%;
 }
