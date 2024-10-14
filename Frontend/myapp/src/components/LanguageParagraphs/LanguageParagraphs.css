@@ -59,12 +59,12 @@
     width: 100%;
 }
 
+.dark input {
+    background-color: #353535;
+}
+
 @media (max-width: 1000px) {
     .blog-post {
         width: 95%;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> f4985c1e4d7401e19da1aaa381a5ff3fc2fb3300

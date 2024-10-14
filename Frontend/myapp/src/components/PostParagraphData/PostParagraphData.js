@@ -3,7 +3,6 @@ import axios from 'axios';
 import './PostParagraphData.css';
 
 const PostParagraphData = () => {
-
     const [formData, setFormData] = useState({
         titleEnglish: '',
         titleRomaji: '',
@@ -30,7 +29,6 @@ const PostParagraphData = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const paragraphData = {
             title: {
                 english: formData.titleEnglish,
@@ -56,8 +54,6 @@ const PostParagraphData = () => {
     return (
         <div className="form">
             <form onSubmit={handleSubmit}>
-
-
                 <div>
                     <label>Level:</label>
                     <input
@@ -100,8 +96,6 @@ const PostParagraphData = () => {
                     />
                 </div>
 
-
-
                 <div>
                     <label>Title (Japanese):</label>
                     <input
@@ -143,9 +137,6 @@ const PostParagraphData = () => {
                     />
                 </div>
 
-
-
-
                 {formData.images.map((image, index) => (
                     <div key={index}>
                         <label>Image {index + 1}:</label>
@@ -165,7 +156,6 @@ const PostParagraphData = () => {
 
                 <button type="submit">Save Paragraph</button>
             </form>
-
 
             <div className="image-preview">
                 {formData.images.map((image, index) => (

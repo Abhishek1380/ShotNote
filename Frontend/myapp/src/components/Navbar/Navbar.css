@@ -1,59 +1,58 @@
+/* General styling for navbar */
 .navbar {
-    padding: 1rem 1rem;
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.3s ease;
 }
 
 .navbar-brand {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #007bff;
-}
-
-.nav-item .nav-link {
-    margin-right: 1rem;
 }
 
 .nav-link {
-    color: #333;
-    transition: color 0.3s;
+    color: #555;
+    transition: color 0.3s ease;
 }
 
 .nav-link:hover {
     color: #007bff;
 }
 
-.navbar-expand-lg .navbar-collapse {
-    justify-content: space-between;
-}
-
-.btn-outline-success {
-    border: 1px solid #28a745;
-    color: #28a745;
-}
-
-.btn-outline-secondary {
-    border: 1px solid #6c757d;
-    color: #6c757d;
-}
-
-.dark-mode {
-    background-color: #343a40;
-    color: white;
-}
-
 .dark-mode .navbar {
-    background-color: #495057;
+    background-color: #333 !important;
 }
 
 .dark-mode .nav-link {
-    color: white;
+    color: #ddd;
 }
 
-.dark-mode .btn-outline-success {
-    border-color: #28a745;
-    color: #28a745;
+.dark-mode .nav-link:hover {
+    color: #fff;
 }
 
-.dark-mode .btn-outline-secondary {
-    border-color: #6c757d;
-    color: #6c757d;
+.form-inline .btn {
+    margin-right: 10px;
+}
+
+.form-inline .btn:last-child {
+    margin-right: 0;
+}
+
+/* Dark mode body */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* For navbar toggler icon (hamburger) */
+.navbar-toggler {
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%288, 8, 8, 0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+body.dark-mode .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
