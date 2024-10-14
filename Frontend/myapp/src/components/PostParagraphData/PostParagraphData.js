@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './PostParagraphData.css'
+import './PostParagraphData.css';
 
 const PostParagraphData = () => {
 
@@ -11,8 +11,8 @@ const PostParagraphData = () => {
         paragraphEnglish: '',
         paragraphRomaji: '',
         paragraphJapanese: '',
+        images: [],
     });
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,6 +22,11 @@ const PostParagraphData = () => {
         });
     };
 
+    const handleImageChange = (e, index) => {
+        const newImages = [...formData.images];
+        newImages[index] = e.target.value;
+        setFormData({ ...formData, images: newImages });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,6 +40,7 @@ const PostParagraphData = () => {
             english: formData.paragraphEnglish,
             romaji: formData.paragraphRomaji,
             japanese: formData.paragraphJapanese,
+            images: formData.images,
         };
 
         try {
@@ -48,8 +54,7 @@ const PostParagraphData = () => {
     };
 
     return (
-        <div class="form">
-
+        <div className="form">
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Title (English):</label>
@@ -61,7 +66,6 @@ const PostParagraphData = () => {
                         required
                     />
                 </div>
-
                 <div>
                     <label>Title (Romaji):</label>
                     <input
@@ -72,7 +76,6 @@ const PostParagraphData = () => {
                         required
                     />
                 </div>
-
                 <div>
                     <label>Title (Japanese):</label>
                     <input
@@ -114,8 +117,33 @@ const PostParagraphData = () => {
                     />
                 </div>
 
+
+                {formData.images.map((image, index) => (
+                    <div key={index}>
+                        <label>Image {index + 1}:</label>
+                        <input
+                            type="text"
+                            value={image}
+                            onChange={(e) => handleImageChange(e, index)}
+                            placeholder={`Image URL ${index + 1}`}
+                        />
+                    </div>
+                ))}
+                {formData.images.length < 6 && (
+                    <button type="button" onClick={() => setFormData({ ...formData, images: [...formData.images, ''] })}>
+                        Add Another Image
+                    </button>
+                )}
+
                 <button type="submit">Save Paragraph</button>
             </form>
+
+
+            <div className="image-preview">
+                {formData.images.map((image, index) => (
+                    <img key={index} src={image} alt={`Image ${index + 1}`} style={{ width: '100px', height: '100px' }} />
+                ))}
+            </div>
         </div>
     );
 };

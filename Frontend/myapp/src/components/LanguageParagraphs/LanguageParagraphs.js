@@ -10,6 +10,7 @@ const LanguageParagraphs = () => {
     const [activeLanguage, setActiveLanguage] = useState('Japanese');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
     useEffect(() => {
         const fetchParagraphs = async () => {
@@ -54,12 +55,15 @@ const LanguageParagraphs = () => {
     };
 
     return (
-        <div className="blog-post">
+        <div className={`blog-post ${isDarkMode ? 'dark' : 'light'}`}>
             {loading && <p>Loading...</p>}
             {error && <p>Error fetching data: {error}</p>}
             {!loading && !error && paragraphs.length > 0 && (
                 <div className="card mb-3">
-                    <div dangerouslySetInnerHTML={{ __html: paragraphs[activeParagraphIndex].img }} />
+                    <div className="image-container" style={{ margin: 'auto' }}>
+                        <div dangerouslySetInnerHTML={{ __html: paragraphs[activeParagraphIndex].img }} />
+                    </div>
+
                     <div className="card-body">
                         <h5 className="card-title">
                             {paragraphs[activeParagraphIndex].title.japanese}
@@ -70,6 +74,13 @@ const LanguageParagraphs = () => {
                         <div className="button-container">
                             <button type="button" className="btn btn-info" onClick={() => handleLanguageChange('English')}>English</button>
                             <button type="button" className="btn btn-info" onClick={() => handleLanguageChange('Romaji')}>Romaji</button>
+                            <button
+                                type="button"
+                                className="btn btn-toggle"
+                                onClick={() => setIsDarkMode(prevMode => !prevMode)}
+                            >
+                                {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+                            </button>
                         </div>
                     </div>
                     {translatedText && (
