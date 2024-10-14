@@ -11,6 +11,7 @@ const LanguageParagraphs = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isRandomMode, setIsRandomMode] = useState(false); // New state to manage mode
 
     useEffect(() => {
         const fetchParagraphs = async () => {
@@ -19,6 +20,11 @@ const LanguageParagraphs = () => {
                 if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
                 setParagraphs(data);
+
+                // Select a random paragraph on initial load
+                if (data.length > 0) {
+                    setRandomParagraph(data.length);
+                }
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -28,6 +34,12 @@ const LanguageParagraphs = () => {
 
         fetchParagraphs();
     }, []);
+
+    const setRandomParagraph = (length) => {
+        const randomIndex = Math.floor(Math.random() * length);
+        setActiveParagraphIndex(randomIndex);
+        setIsRandomMode(true); // Switch to random mode
+    };
 
     const handleLanguageChange = (language) => {
         if (language === 'English') {
@@ -41,16 +53,36 @@ const LanguageParagraphs = () => {
     };
 
     const handleNext = () => {
-        if (activeParagraphIndex < paragraphs.length - 1) {
-            setActiveParagraphIndex(prevIndex => prevIndex + 1);
-            setTranslatedText('');
+        if (!isRandomMode) {
+            // Only allow sequential navigation if not in random mode
+            if (activeParagraphIndex < paragraphs.length - 1) {
+                setActiveParagraphIndex(prevIndex => prevIndex + 1);
+                setTranslatedText('');
+            }
         }
     };
 
     const handlePrevious = () => {
-        if (activeParagraphIndex > 0) {
-            setActiveParagraphIndex(prevIndex => prevIndex - 1);
-            setTranslatedText('');
+        if (!isRandomMode) {
+            // Only allow sequential navigation if not in random mode
+            if (activeParagraphIndex > 0) {
+                setActiveParagraphIndex(prevIndex => prevIndex - 1);
+                setTranslatedText('');
+            }
+        }
+    };
+
+    const handleRandomParagraph = () => {
+        setRandomParagraph(paragraphs.length);
+        setTranslatedText(''); // Reset translated text when changing paragraph
+    };
+
+    const handleToggleMode = () => {
+        setIsRandomMode(prevMode => !prevMode); // Toggle between random and sequential mode
+        if (isRandomMode) {
+            setActiveParagraphIndex(0); // Reset to first paragraph if switching to sequential
+        } else {
+            handleRandomParagraph(); // Randomly select a paragraph if switching to random
         }
     };
 
@@ -61,7 +93,7 @@ const LanguageParagraphs = () => {
             {!loading && !error && paragraphs.length > 0 && (
                 <div className="card mb-3">
                     <div className="image-container" style={{ margin: 'auto' }}>
-                        <div dangerouslySetInnerHTML={{ __html: paragraphs[activeParagraphIndex].img }} />
+                        <div dangerouslySetInnerHTML={{ __html: paragraphs[activeParagraphIndex]?.img }} />
                     </div>
 
                     <div className="card-body">
@@ -81,6 +113,20 @@ const LanguageParagraphs = () => {
                             >
                                 {isDarkMode ? 'Light Mode' : 'Dark Mode'}
                             </button>
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                onClick={handleRandomParagraph}
+                            >
+                                Random Paragraph
+                            </button>
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                onClick={handleToggleMode}
+                            >
+                                {isRandomMode ? 'Switch to Sequential' : 'Switch to Random'}
+                            </button>
                         </div>
                     </div>
                     {translatedText && (
@@ -97,13 +143,13 @@ const LanguageParagraphs = () => {
                     <nav aria-label="Page navigation example">
                         <ul className="pagination justify-content-center">
                             <li className={`page-item ${activeParagraphIndex === 0 ? 'disabled' : ''}`}>
-                                <button className="page-link" onClick={handlePrevious} disabled={activeParagraphIndex === 0}>Previous</button>
+                                <button className="page-link" onClick={handlePrevious} disabled={activeParagraphIndex === 0 || isRandomMode}>Previous</button>
                             </li>
                             <li className="page-item">
                                 <span className="page-link">{activeParagraphIndex + 1} / {paragraphs.length}</span>
                             </li>
                             <li className={`page-item ${activeParagraphIndex === paragraphs.length - 1 ? 'disabled' : ''}`}>
-                                <button className="page-link" onClick={handleNext} disabled={activeParagraphIndex === paragraphs.length - 1}>Next</button>
+                                <button className="page-link" onClick={handleNext} disabled={activeParagraphIndex === paragraphs.length - 1 || isRandomMode}>Next</button>
                             </li>
                         </ul>
                     </nav>

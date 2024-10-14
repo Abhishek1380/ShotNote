@@ -56,6 +56,29 @@ const PostParagraphData = () => {
     return (
         <div className="form">
             <form onSubmit={handleSubmit}>
+
+
+                <div>
+                    <label>Level:</label>
+                    <input
+                        type="text"
+                        name="level"
+                        value={formData.level}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Length: </label>
+                    <input
+                        type="text"
+                        name="length"
+                        value={formData.length}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+
                 <div>
                     <label>Title (English):</label>
                     <input
@@ -76,6 +99,9 @@ const PostParagraphData = () => {
                         required
                     />
                 </div>
+
+
+
                 <div>
                     <label>Title (Japanese):</label>
                     <input
@@ -116,6 +142,8 @@ const PostParagraphData = () => {
                         required
                     />
                 </div>
+
+
 
 
                 {formData.images.map((image, index) => (

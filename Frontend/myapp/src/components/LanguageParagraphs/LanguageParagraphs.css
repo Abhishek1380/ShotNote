@@ -21,6 +21,10 @@
     text-align: right;
 }
 
+.button-container .btn {
+    margin: 5px;
+}
+
 .btn-info {
     margin: 0 4px;
 }
