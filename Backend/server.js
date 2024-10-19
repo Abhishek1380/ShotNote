@@ -103,6 +103,37 @@ app.delete('/vocabulary/:id', async (req, res) => {
     }
 });
 
+app.post('/kanji', async (req, res) => {
+    const newKanji = req.body;
+
+    try {
+        const database = client.db("ShopNote"); // Replace with your database name
+        const collection = database.collection("kanji");
+
+        const result = await collection.insertOne(newKanji);
+
+        res.status(201).json(result);
+    } catch (error) {
+        console.error('Error adding kanji:', error);
+        res.status(500).json({ message: 'Error adding kanji' });
+    }
+});
+
+// GET route for fetching kanji data
+app.get('/kanji', async (req, res) => {
+    try {
+        const database = client.db("ShopNote"); // Replace with your database name
+        const collection = database.collection("kanji");
+        const data = await collection.find({}).toArray(); // Fetch all documents
+        res.status(200).json(data); // Send data back to the client
+    } catch (error) {
+        console.error('Error fetching kanji:', error);
+        res.status(500).json({ message: 'Error fetching kanji' });
+    }
+});
+
+
+
 
 async function startServer() {
     await connectToDatabase();

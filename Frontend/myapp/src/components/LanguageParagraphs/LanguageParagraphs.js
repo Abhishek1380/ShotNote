@@ -141,23 +141,26 @@ const LanguageParagraphs = () => {
                             </div>
                         </div>
                     )}
-                    <nav aria-label="Page navigation example">
-                        <ul className="pagination justify-content-center">
-                            <li className={`page-item ${activeParagraphIndex === 0 ? 'disabled' : ''}`}>
-                                <button className="page-link" onClick={handlePrevious} disabled={activeParagraphIndex === 0 || isRandomMode}>Previous</button>
-                            </li>
-                            <li className="page-item">
-                                <span className="page-link">{activeParagraphIndex + 1} / {paragraphs.length}</span>
-                            </li>
-                            <li className={`page-item ${activeParagraphIndex === paragraphs.length - 1 ? 'disabled' : ''}`}>
-                                <button className="page-link" onClick={handleNext} disabled={activeParagraphIndex === paragraphs.length - 1 || isRandomMode}>Next</button>
-                            </li>
-                        </ul>
-                    </nav>
+
+                    {/* Pagination */}
+                    {!isRandomMode ? (
+                        <nav aria-label="Page navigation example">
+                            <ul className="pagination justify-content-center">
+                                <li className={`page-item ${activeParagraphIndex === 0 ? 'disabled' : ''}`}>
+                                    <button className="page-link" onClick={handlePrevious} disabled={activeParagraphIndex === 0 || isRandomMode}>Previous</button>
+                                </li>
+                                <li className="page-item">
+                                    <span className="page-link">{activeParagraphIndex + 1} / {paragraphs.length}</span>
+                                </li>
+                                <li className={`page-item ${activeParagraphIndex === paragraphs.length - 1 ? 'disabled' : ''}`}>
+                                    <button className="page-link" onClick={handleNext} disabled={activeParagraphIndex === paragraphs.length - 1 || isRandomMode}>Next</button>
+                                </li>
+                            </ul>
+                        </nav>
+                    ) : null}
                 </div>
             )}
         </div>
-    );
-};
-
+    )
+}
 export default LanguageParagraphs;
